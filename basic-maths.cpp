@@ -1,5 +1,4 @@
-#include <iostream>
-#include<math.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int countdig(int n){
@@ -51,17 +50,24 @@ string checkArmstrong(int n){
 
 void printalldivisor(int n){
     cout<<"the divisor of "<<n<<" is follows: ";
-    for(int i=1;i<=sqrt(n);i++){
+    vector<int> ls;
+    for(int i=1;i*i<n;i++){
         
         if(n%i==0){
             if(n/i!=i){
-            cout<<i<<" "<<n/i<<" ";
+            ls.push_back(i);
+            ls.push_back(n/i);
             }
             else{
-                cout<<i<<" ";
+            ls.push_back(i);
+
             }
         }
         
+    }
+    sort(ls.begin(),ls.end());
+    for(auto it:ls){
+        cout<<it<<" ";
     }
 }
 
