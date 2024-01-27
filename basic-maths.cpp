@@ -48,8 +48,7 @@ string checkArmstrong(int n){
     }
 }
 
-void printalldivisor(int n){
-    cout<<"the divisor of "<<n<<" is follows: ";
+vector<int> printalldivisor(int n){
     vector<int> ls;
     for(int i=1;i*i<n;i++){
         
@@ -66,9 +65,37 @@ void printalldivisor(int n){
         
     }
     sort(ls.begin(),ls.end());
-    for(auto it:ls){
-        cout<<it<<" ";
+   return ls;
+}
+
+string checkprime(int n){
+    vector<int> ls=printalldivisor(n);
+    if(ls.size()<=2){
+        return "is";
     }
+    else return "is not";
+}
+
+//basic method to find hcf
+int findhcf(int a ,int b){
+    for(int i=min(a,b);i>0;i--){
+        if(a%i==0 && b%i==0){
+            return i;
+        }
+    }
+}
+
+int findhcfbyeu(int a,int b){
+    while(a>0 && b>0){
+        if(a>b){
+            a=a%b;
+        }
+        else b=b%a;
+    }
+    if(a==0){
+        return b;
+    }
+    else return a;
 }
 
 int main(){
@@ -79,6 +106,17 @@ int main(){
     cout<<"Reverse of number is "<<reversenum(n)<<endl;
     cout<<"The number "<<checkpalindrone(n)<<" a palindrone"<<endl;
     cout<<"The number "<<checkArmstrong(n)<<" a armstrong"<<endl;
-    printalldivisor(n);
+    cout<<"the divisor of "<<n<<" is follows: ";
+    vector<int> ab = printalldivisor(n);
+    for(auto it:ab){
+        cout<<it<<" ";
+        }
+    cout<<endl;
+    cout<<"The number "<<checkprime(n)<<" a prime number"<<endl;
+    int a,b;
+    cout<<"enter two number to find hcf ";
+    cin>>a>>b;
+    cout<<"the hcf of "<<a<<","<<b<<" is "<<findhcf(a,b)<<endl;
+    cout<<"the hcf of "<<a<<","<<b<<" by euclidean algorithm is "<<findhcfbyeu(a,b)<<endl;
 return 0;
 }
